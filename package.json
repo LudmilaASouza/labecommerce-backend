@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "jokenpo": "node jokenpo.js",
+    "par-impar": "node par-ou-impar.js"
     
   },
   "repository": {
