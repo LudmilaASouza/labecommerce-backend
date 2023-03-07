@@ -1,0 +1,23 @@
+{
+  "name": "labecommerce-backend",
+  "version": "1.0.0",
+  "description": "Exercício Node-Package-Json",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "jokenpo": "node jokenpo.js",
+    "par-impar": "node par-ou-impar.js"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LudmilaASouza/labecommerce-backend.git"
+  },
+  "author": "Ludmila",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LudmilaASouza/labecommerce-backend/issues"
+  },
+  "homepage": "https://github.com/LudmilaASouza/labecommerce-backend#readme"
+}
