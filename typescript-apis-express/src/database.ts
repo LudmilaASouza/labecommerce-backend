@@ -1,6 +1,6 @@
-import { ClientRegister, ProductRegister, Purchase, TYPES_CATEGORY } from "./types";
+import { TUser, TProduct, TPurchase, TYPES_CATEGORY } from "./types";
 
-export const user : ClientRegister[] = [
+export const user : TUser[] = [
     {
         id : "LudmilaASouza",
         email: "ludmilasouz.a@hotmail.com",
@@ -25,7 +25,7 @@ export function getAllUsers () {
 }
 
 
-export const product : ProductRegister[] = [
+export const product : TProduct[] = [
     {
         id: "001",
         name: "Smart TV 50'",
@@ -41,7 +41,7 @@ export const product : ProductRegister[] = [
 ]
 
 export function createProduct (id: string, name: string, price: number, category: TYPES_CATEGORY){
-    const newProduct : ProductRegister = {id, name, price, category}
+    const newProduct : TProduct = {id, name, price, category}
     product.push(newProduct)
     //console.log("Produto cadastrado com sucesso!")
 }
@@ -63,7 +63,7 @@ export function queryProductsByName (q: string){
 }
 
 
-export const purchase : Purchase[] = [
+export const purchase : TPurchase[] = [
     {
         userId: "LudmilaASouza", //string
         productId: "002", //string
@@ -80,7 +80,7 @@ export const purchase : Purchase[] = [
 ]
 
 export function createPurchase (userId: string, productId: string, quantity: number, totalPrice: number){
-    const newPurchase : Purchase = {userId, productId, quantity, totalPrice}
+    const newPurchase : TPurchase = {userId, productId, quantity, totalPrice}
     purchase.push(newPurchase)
     //console.log("Compra realizada com sucesso!")
 }

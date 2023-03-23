@@ -4,20 +4,20 @@ export enum TYPES_CATEGORY {
     APPLIANCE = "Eletrodomésticos"
 }
 
-export type ClientRegister = {
+export type TUser = {
     id: string,
     email: string,
     password: string
 }
 
-export type ProductRegister = {
+export type TProduct = {
     id:string,
     name: string,
     price: number,
     category: TYPES_CATEGORY
 }
 
-export type Purchase = {
+export type TPurchase = {
     userId: string,
     productId: string,
     quantity: number,
