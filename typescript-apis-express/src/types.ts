@@ -2,7 +2,7 @@ export enum TYPES_CATEGORY {
     ACESSORIES = "Acessórios",
     ELETRONICS = "Eletrônicos",
     APPLIANCE = "Eletrodomésticos"
-}
+} 
 
 export type TUser = {
     id: string,
