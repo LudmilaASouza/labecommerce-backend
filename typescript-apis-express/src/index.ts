@@ -312,73 +312,185 @@ app.post('/products', (req: Request, res: Response) => {
 })
 
 /*falta esse*/app.post('/purchases', (req: Request, res: Response) => {
-    const userId = req.body.userId as string
-    const productId = req.body.productId as string
-    const quantity = req.body.quantity as number
-    const totalPrice = req.body.totalPrice as number
+    try {
+        const {userId, productId, quantity, totalPrice} : TPurchase = req.body
+        
+        if(!userId){
+            throw new Error("ID do usuário inexistente, por favor digite um ID válido.")
+        }
+        if(typeof userId !== "string"){
+            throw new Error("A ID do usuário tem que ser uma string.")
+        }
 
-    const createPurchases: TPurchase = {
-        userId, productId, quantity, totalPrice
+        if(!productId){
+            throw new Error("ID do produto inexistente, por favor digite um ID válido.")
+        }
+        if(typeof productId !== "string"){
+            throw new Error("A ID do produto tem que ser uma string.")
+        }
+
+        if(!quantity){
+            throw new Error("Quantidade do produto inexistente, por favor digite uma quantidade válida.")
+        }
+        if(typeof quantity !== "number"){
+            throw new Error("A quantidade do produto tem que ser um número.")
+        }
+
+        if(!totalPrice){
+            throw new Error("Total do produto inexistente, por favor digite um total válido.")
+        }
+        if(typeof totalPrice !== "number"){
+            throw new Error("o total do produto tem que ser um número.")
+        }
+
+        const verificaIdUser = users.find(user => user.id === userId)
+        if (!verificaIdUser) {
+            throw new Error("ID do usuário inexistente, por favor digite outra ID.")
+        }
+
+        const verificaIdProduct = products.find(product => product.id === productId)
+        if (!verificaIdProduct) {
+            throw new Error("Id do produto inexistente, por favor digite outra ID.")
+        }
+
+        if (verificaIdUser && verificaIdProduct){
+            const createPurchases: TPurchase = {
+                userId, productId, quantity, totalPrice
+            }
+            purchases.push(createPurchases)
+            res.status(201).send("Compra realizada com sucesso.")
+        } 
+    } catch (error) {
+        console.log(error)
+
+        if(res.statusCode === 200){
+            res.status(500)
+        }
+        
+        if(error instanceof Error){
+            res.send(error.message)
+        } else {
+            res.send("Erro inesperado.")
+        }
     }
-
-    purchases.push(createPurchases)
-    res.status(201).send("Compra realizada com sucesso.")
 })
 
-/*falta esse*/app.put('/users/:id', (req:Request, res:Response) => {
-    const {id} = req.params
-    const newId = req.body.id
-    const {email, password} = req.body
+app.put('/users/:id', (req: Request, res: Response) => {
+    try {
+        const { id } = req.params
+        const newId = req.body.id
+        const { email, password } = req.body
 
-    if(!newId){
-        throw new Error("ID inexistente, por favor digite um ID válido.")
-    }
-    if(typeof newId !== "string"){
-        throw new Error("A ID tem que ser uma string.")
-    }
+        if (!newId) {
+            throw new Error("ID inexistente, por favor digite um ID válido.")
+        }
+        if (typeof newId !== "string") {
+            throw new Error("A ID tem que ser uma string.")
+        }
 
-    if(!email){
-        throw new Error("Email inexistente, por favor digite um Email válido.")
-    }
-    if(typeof email !== "string"){
-        throw new Error("O Email tem que ser uma string.")
-    }
+        if (!email) {
+            throw new Error("Email inexistente, por favor digite um Email válido.")
+        }
+        if (typeof email !== "string") {
+            throw new Error("O Email tem que ser uma string.")
+        }
 
-    if (!password) {
-        throw new Error("Senha inexistente, por favor digite uma senha válida.")
-    }
-    if (typeof password !== "string") {
-        throw new Error("A senha tem que ser uma string.")
-    }
+        if (!password) {
+            throw new Error("Senha inexistente, por favor digite uma senha válida.")
+        }
+        if (typeof password !== "string") {
+            throw new Error("A senha tem que ser uma string.")
+        }
 
-    if (!id){
-        throw new Error("Digite a ID do usuário.")
-    }
+        const userFind = users.find((user) => user.id === id)
 
-    const userFind = users.find((user) => user.id === id)
+        if (userFind) {
+            userFind.id = newId || userFind.id
+            userFind.email = email || userFind.email
+            userFind.password = password || userFind.password
 
-    if (userFind) {
-        userFind.id = newId || userFind.id
-        userFind.email = email || userFind.email
-        userFind.password = password || userFind.password
+            res.status(200).send("Cadastro atualizado com sucesso.")
+        } else {
+            throw new Error("ID inexistente, por favor digite um ID válido.")
+        }
+
+    } catch (error) {
+        console.log(error)
+
+        if (res.statusCode === 200) {
+            res.status(500)
+        }
+
+        if (error instanceof Error) {
+            res.send(error.message)
+        } else {
+            res.send("Erro inesperado.")
+        }
+
     }
-    res.status(200).send("Cadastro atualizado com sucesso.")
 })
 
-/*falta esse*/app.put('/products/:id', (req:Request, res:Response) => {
-    const {id} = req.params
-    const newId = req.body.id
-    const {name, price, category} = req.body
+app.put('/products/:id', (req: Request, res: Response) => {
+    try {
 
-    const productFind = products.find((product) => product.id === id)
+        const { id } = req.params
+        const newId = req.body.id
+        const { name, price, category } : TProduct = req.body
 
-    if (productFind) {
-        productFind.id = newId || productFind.id
-        productFind.name = name || productFind.name
-        productFind.price = price || productFind.price
-        productFind.category = category || productFind.category
+        if (!newId) {
+            throw new Error("ID inexistente, por favor digite um ID válido.")
+        }
+        if (typeof newId !== "string") {
+            throw new Error("A ID tem que ser uma string.")
+        }
+
+        if (!name) {
+            throw new Error("Nome inexistente, por favor digite um nome válido.")
+        }
+        if (typeof name !== "string") {
+            throw new Error("O nome tem que ser uma string.")
+        }
+
+        if (!price) {
+            throw new Error("Preço inexistente, por favor digite um preço válido.")
+        }
+        if (typeof price !== "number") {
+            throw new Error("O preço tem que ser do tipo número.")
+        }
+
+        if (!category) {
+            throw new Error("Categoria inexistente, por favor digite uma categoria válida.")
+        }
+        if (!Object.values(TYPES_CATEGORY).includes(category)) {
+            throw new Error("Esta sub categoria não existe, somente: acessórios, eletrônicos e eletrodomésticos.")
+        }
+
+        const productFind = products.find((product) => product.id === id)
+
+        if (productFind) {
+            productFind.id = newId || productFind.id
+            productFind.name = name || productFind.name
+            productFind.price = price || productFind.price
+            productFind.category = category || productFind.category
+
+            res.status(200).send("Produto atualizado com sucesso.")
+        } else {
+            throw new Error("ID do produto inexiste, por favor digite uma ID válida.")
+        }
+
+    } catch (error) {
+        console.log(error)
+
+        if (res.statusCode === 200) {
+            res.status(500)
+        }
+
+        if (error instanceof Error) {
+            res.send(error.message)
+        } else {
+            res.send("Erro inesperado.")
+        }
     }
-    res.status(200).send("Produto atualizado com sucesso.")
 }) 
 
 app.delete('/users/:id', (req: Request, res: Response) => {
