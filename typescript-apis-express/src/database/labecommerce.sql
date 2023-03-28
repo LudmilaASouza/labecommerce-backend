@@ -30,3 +30,6 @@ VALUES
 SELECT * FROM products;
 
 SELECT * FROM users;
+
+DROP TABLE products;
+DROP TABLE users;
