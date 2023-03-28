@@ -311,10 +311,10 @@ app.post('/products', (req: Request, res: Response) => {
     }
 })
 
-/*falta esse*/app.post('/purchases', (req: Request, res: Response) => {
+app.post('/purchases', (req: Request, res: Response) => {
     try {
         const {userId, productId, quantity, totalPrice} : TPurchase = req.body
-        
+                
         if(!userId){
             throw new Error("ID do usuário inexistente, por favor digite um ID válido.")
         }
@@ -354,6 +354,13 @@ app.post('/products', (req: Request, res: Response) => {
         }
 
         if (verificaIdUser && verificaIdProduct){
+            const verificaTotal = verificaIdProduct.price * quantity 
+
+            if (totalPrice !== verificaTotal) {
+                res.status(400)
+                throw new Error("O preço total do produto está incorreto. Digite novamente.")
+            }
+
             const createPurchases: TPurchase = {
                 userId, productId, quantity, totalPrice
             }
