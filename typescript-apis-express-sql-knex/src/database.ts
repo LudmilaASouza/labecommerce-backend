@@ -1,4 +1,4 @@
-import { TUser, TProduct, TPurchase, TYPES_CATEGORY } from "./types";
+/*import { TUser, TProduct, TPurchase, TYPES_CATEGORY } from "./types";
 
 export const users : TUser[] = [
     {
@@ -92,3 +92,4 @@ export function getAllPuchases(){
 export function getAllPurchasesFromUsersId (userIdToShearch:string) {
     return purchases.filter((purchase) => purchase.userId === userIdToShearch)
 }
+*/

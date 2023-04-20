@@ -1,25 +1,26 @@
-export enum TYPES_CATEGORY {
+/*export enum TYPES_CATEGORY {
     ACESSORIES = "Acessórios",
     ELETRONICS = "Eletrônicos",
     APPLIANCE = "Eletrodomésticos"
-} 
+} */
 
 export type TUser = {
     id: string,
+    name: string,
     email: string,
-    password: string
+    password: string,
 }
 
 export type TProduct = {
     id:string,
     name: string,
     price: number,
-    category: TYPES_CATEGORY
+    description: string,
+    imageUrl: string
 }
 
 export type TPurchase = {
-    userId: string,
-    productId: string,
-    quantity: number,
+    id: string,
+    buyerId: string,
     totalPrice: number
 }
