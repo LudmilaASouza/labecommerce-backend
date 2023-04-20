@@ -33,6 +33,8 @@ CREATE TABLE purchases_products (
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
+SELECT * FROM purchases_products;
+
 INSERT INTO users (id, email, password)
 VALUES
 ("U01", "ludmilasouz.a@hotmail.com", "741852"),
@@ -96,7 +98,7 @@ ORDER BY price ASC;
 
 SELECT purchases.id AS idPurchases, users.id AS idUsers, 
 users.email, purchases.total_price, 
-purchases.paid, purchases.delivered_at 
+purchases.paid, purchases.created_at 
 FROM purchases
 INNER JOIN users
 ON purchases.buyer_id = users.id; 
