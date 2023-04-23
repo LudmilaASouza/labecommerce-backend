@@ -14,7 +14,7 @@
 <https://dbdiagram.io/d/63c6e8e5296d97641d7a4666>
 
 
-## Documentação Ṕostman:
+## Documentação Postman:
 
 [<https://documenter.getpostman.com/view/22178263/2s93RRvsyt>](https://documenter.getpostman.com/view/22178263/2s93RRvsyt)
 
